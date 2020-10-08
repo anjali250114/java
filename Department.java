@@ -1,21 +1,43 @@
   
-//1.Implement the concept of control statements and array in the list
-//2.Implement the concept of class,data members,member functions and access specifier.
+ 
 import java.util.*;
 
 public class Department {
-	static String DeptName="Value Cart";
-	int pId;
-	String productName;
-	int priceList;
+	static int pId;
+	static String productName;
+	static int priceList;
 	
-	public Department(int pId, String productName, int priceList){											//Member functions
-		this.pId=pId;
-		this.productName=productName;
-		this.priceList=priceList;
+	static class name{												//static class
+													
+			static String vName;									//static variable
+			
+			static{													//static block
+				vName="Value Cart";
+			}
+			static String display(){								//static function
+				return vName;
+				
+			}
+		}
+	public Department(int pId){											//constructor
+		Department.pId=pId;
 	}
 	
-	public void getProduct(){
+	public Department(int pId, String productName, int priceList) { 	// constructor overloading
+		Department.pId = pId;
+		Department.productName = productName;
+		Department.priceList = priceList;
+	}
+	
+	public void getproduct(int pId){									//function overloading
+		if(pId>=01 && pId<=10)
+			System.out.println("Products ranging from 01 to 10 comes under Food category");
+		else if(pId>=11 && pId<=20)
+			System.out.println("Products ranging from 11 to 20 comes under Beverages category");
+		else if(pId>=21 && pId<=30)
+			System.out.println("Products ranging from 21 to 30 comes under Cosmetics category");
+	}
+	public void getProduct(){													//function overloading
 		
 		if(priceList<=1000)
 		
@@ -39,9 +61,8 @@ public class Department {
 		int items;
 		int price[];
 		String prodName[];
-		int c=1;
 		Scanner st=new Scanner(System.in);
-		System.out.println("Welcome to " + DeptName);
+		System.out.println("Welcome to " + Department.name.display());
 		System.out.println("How many products you have in the store?");
 		items=st.nextInt();
 		pId=new int[items];
@@ -49,7 +70,8 @@ public class Department {
 		price=new int[items];
 		
 		for(int i=0;i<items;i++){                                                         	//Using for-loop and if statement as control statement
-			pId[i]=c++;
+			System.out.println("Enter the ProductID");                                                       
+			pId[i]=st.nextInt();
 			System.out.println("Enter the name of the item "+(i+1));
 			prodName[i]=st.next();
 			System.out.println("Enter the price of the "+prodName[i]);
@@ -68,7 +90,9 @@ public class Department {
 		for(int i=0;i<items;i++){
 			Department ob=new Department(pId[i],prodName[i],price[i]);							//Array of objects
 			ob.getProduct();																	//Calling function
+			Department ob1=new Department(pId[i]);												//calling the constructor
+			ob1.getproduct(pId[i]);																//calling the function
 		}
-		
+	st.close();	
 	}
 }
